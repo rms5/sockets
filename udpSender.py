@@ -1,13 +1,18 @@
 import socket
+import sys
 
-UDP_IP = "10.0.0.9"
-UDP_PORT = 6666
-MESSAGE = "SOS"
+tosend = sys.argv[1]
 
-print "UDP target IP:", UDP_IP
-print "UDP target port:", UDP_PORT
-print "message:", MESSAGE
+UDP_IP = "10.0.0.8" #recievers ip address
+UDP_PORT = 5005
+MESSAGE = "Packet number "
 
-sock = socket.socket(socket.AF_INET, # Internet
-                     socket.SOCK_DGRAM) # UDP
-sock.sendto("SOS", ("10.0.0.9", 6666))
+for num in range(1,tosend):
+
+    print "UDP target IP:", UDP_IP
+    print "UDP target port:", UDP_PORT
+    print "message:", MESSAGE + str(num)
+
+    sock = socket.socket(socket.AF_INET, # Internet
+           socket.SOCK_DGRAM) # UDP
+    sock.sendto(MESSAGE + str(num), (UDP_IP, UDP_PORT))
